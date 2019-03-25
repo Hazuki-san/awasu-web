@@ -4,6 +4,7 @@ const md5 = require("md5");
 const { query } = require("../db");
 const passwordHelper = require("../utils/passwordHelper")
 const passport = require("passport")
+const bcrypt = require("bcrypt")
 
 app.get("/register", async (req, res) => {
     if (req.user) {
