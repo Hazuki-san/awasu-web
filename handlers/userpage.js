@@ -43,8 +43,8 @@ async function handle(req, res) {
 			isFriend = true;
 		}
 	}
-	let topScores = await query("SELECT * FROM scores INNER JOIN beatmaps ON scores.beatmap_md5 = beatmaps.beatmap_md5 WHERE completed = 3 AND userid = ? ORDER BY pp DESC", req.params.id);
-	let recentScores = await query("SELECT * FROM scores INNER JOIN beatmaps ON scores.beatmap_md5 = beatmaps.beatmap_md5 WHERE userid = ? ORDER BY time DESC", req.params.id)
+	let topScores = await query("SELECT pp, accuracy, song_name, beatmap_id, scores.id  FROM scores INNER JOIN beatmaps ON scores.beatmap_md5 = beatmaps.beatmap_md5 WHERE completed = 3 AND userid = ? ORDER BY pp DESC", req.params.id);
+	let recentScores = await query("SELECT pp, accuracy, song_name, beatmap_id, scores.id  FROM scores INNER JOIN beatmaps ON scores.beatmap_md5 = beatmaps.beatmap_md5 WHERE userid = ? ORDER BY time DESC", req.params.id)
     res.render("base", {
         page: "Userpage",
         loggedIn: req.isAuthenticated(),
