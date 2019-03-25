@@ -42,8 +42,8 @@ app.post("/register", async (req, res) => {
         return;
     }
     console.log(email)
-    await query("INSERT INTO users(username, username_safe, password_md5, salt, email, register_datetime, privileges) VALUES(?,?,?,'',?,?,?)", username, usernameSafe, hash, email, unixTime, 1048576)
-    await query("INSERT INTO users_stats(username) VALUES(?)", username);
+    await query("INSERT INTO users(username, username_safe, password_md5, salt, email, register_datetime, privileges, password_version) VALUES(?,?,?,'',?,?,?,2)", username, usernameSafe, hash, email, unixTime, 1048576)
+    await query("INSERT INTO users_stats(username, user_color, user_style, ranked_score_std, playcount_std, total_score_std, ranked_score_taiko, playcount_taiko, total_score_taiko, ranked_score_ctb, playcount_ctb, total_score_ctb, ranked_score_mania, playcount_mania, total_score_mania) VALUES (?, 'black', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);", username);
     res.redirect("/verification");
     res.end();
     });
