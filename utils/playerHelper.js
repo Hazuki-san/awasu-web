@@ -58,6 +58,8 @@ async function getModeStats(id, mode) {
     }
     let request = await requestHelper.request_get("http://awasu.xyz/api/v1/users/full?id="+id);
     let data = request.body;
+    console.log(data)
+    console.log(request)
     if (data.std == undefined) {
         return {
             "ranked_score": 0,
