@@ -26,11 +26,13 @@ app.use(passport.session());
 
 
 app.get("/", require("./handlers/homepage"))
+app.get("/home/download", require("./handlers/download"))
 app.get("/home/friends", require("./handlers/friends"))
 app.use(require("./handlers/login"))
 app.use(require("./handlers/register"))
 app.use(require("./handlers/settings"))
 app.use(require("./handlers/logout"))
 app.get("/users/:id", require("./handlers/userpage"));
+app.get("/u/:id", require("./handlers/userpage"));
 
 app.listen(config.site.port);
