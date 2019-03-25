@@ -29,7 +29,7 @@ app.post("/register", async (req, res) => {
         res.redirect("/register?e=notAllFilled")
         return;
     }
-    bcrypt.hash(password, 10, function(err, hash) {
+    bcrypt.hash(password, 10, async function(err, hash) {
 
     let usernameSafe = username.toLowerCase().replace(" ", "_");
     let unixTime = Math.floor(new Date().getTime() / 1000)
