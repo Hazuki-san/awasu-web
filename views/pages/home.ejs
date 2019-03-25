@@ -1,0 +1,180 @@
+<#include "base.html">
+  <div class="osu-layout__section osu-layout__section--full js-content home_index">
+    <div class="osu-page osu-page--header">
+      <ul class="page-mode">
+        <li class="page-mode__item">
+          <a href="/" class="
+page-mode-link
+page-mode-link--is-active
+">
+            Home
+
+            <span class="page-mode-link__stripe"></span>
+          </a>
+        </li>
+        <% if (loggedIn) { %>
+          <li class="page-mode__item">
+            <a href="/home/friends" class="
+page-mode-link
+
+">
+              Friends
+
+              <span class="page-mode-link__stripe"></span>
+            </a>
+          </li>
+
+          <li class="page-mode__item">
+            <a href="/home/account/edit" class="
+page-mode-link
+
+">
+              Settings
+
+              <span class="page-mode-link__stripe"></span>
+            </a>
+          </li>
+        <% } %>
+      </ul>
+
+      <div class="osu-page-header osu-page-header--two-col osu-page-header--home-user js-current-user-cover"
+        style="background-image: url(&quot;https://osu.ppy.sh/images/headers/profile-covers/c7.jpg&quot;);">
+        <div class="osu-page-header__box osu-page-header__box--two-col">
+          <h1 class="osu-page-header__title u-ellipsis-overflow">
+            <% if (loggedIn) {%>
+              Hello, <strong><a href="/users/<%= userData.id %>" class="link link--white"><%= userData.username %></a></strong>!
+              <% } else { %>
+                Welcome to <strong>awasu!</strong>
+            <% }%>
+          </h1>
+        </div>
+
+        <div class="osu-page-header__box osu-page-header__box--status osu-page-header__box--graph">
+          <div class="osu-page-header__status">
+            <div class="osu-page-header__status-label">
+              Registered Users
+            </div>
+            <div class="js-forum-topic-watch--unread osu-page-header__status-text">
+              <%= userCount %>
+            </div>
+          </div>
+
+          <div class="osu-page-header__status">
+            <div class="osu-page-header__status-label">
+              Submitted Scores
+            </div>
+            <div class="js-forum-topic-watch--unread osu-page-header__status-text">
+                <%= scoreCount %>
+            </div>
+          </div>
+
+          <div class="osu-page-header__status">
+            <div class="osu-page-header__status-label">
+              Beatmaps
+            </div>
+            <div class="osu-page-header__status-text">
+                <%= mapCount %>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div class="osu-page osu-page--small-desktop">
+      <div class="user-home">
+        <div class="user-home__news">
+          <h2 class="user-home__news-title">Information</h2>
+
+
+          <div class="news-post-preview">
+            <a class="news-post-preview__image"
+              style="background-image: url(https://ripple.moe/static/headers/donate2.png); outline-width: 0px !important; user-select: auto !important;"></a>
+            <div class="news-post-preview__body" >
+              <div class="news-post-preview__post-right">
+                <a class="news-post-preview__post-title" style="margin-left: 5%;">
+                  What is awasu!
+                </a>
+                <div class="news-post-preview__post-content" style="margin-left: 5%;">
+                  <p>Based on osu!Ripple, awasu is a custom server with many features such as osu!Direct, custom ranked beatmaps, pp for all 4 modes and a nice community! <br> There are many ways play such as through our custom awasu! client as well as host redirection!</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="news-post-preview">
+              <a class="news-post-preview__image"
+                style="background-image: url(https://akatsuki.pw/static/headers/leaderboard.jpg); outline-width: 0px !important; user-select: auto !important;"></a>
+              <div class="news-post-preview__body" >
+                <div class="news-post-preview__post-right">
+                  <a class="news-post-preview__post-title" style="margin-left: 5%;">
+                    Is this free to play?
+                  </a>
+                  <div class="news-post-preview__post-content" style="margin-left: 5%;">
+                    <p>Just like other custom servers on osu! you don't need to pay to join, however, if you really want to you can support us and get cool features such as flag changing or username changing you can do so <a href="/donate">here</a>!</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="news-post-preview">
+                <a class="news-post-preview__image"
+                  style="background-image: url(https://ripple.moe/static/headers/documentation.jpg); outline-width: 0px !important; user-select: auto !important;"></a>
+                <div class="news-post-preview__body" >
+                  <div class="news-post-preview__post-right">
+                    <a href="https://discord.gg/xWJtmhq" class="news-post-preview__post-title" style="margin-left: 5%;">
+                      How to interact with the community?
+                    </a>
+                    <div class="news-post-preview__post-content" style="margin-left: 5%;">
+                      <p>There's a forum, just like the official server, however, for now you can join the <a href="https://discord.gg/xWJtmhq">Discord</a></p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+
+
+
+        </div>
+        <div class="user-home__right-sidebar">
+          <div class="user-home__buttons">
+            <div class="user-home__button">
+              <a href="/download" class="btn-home btn-home--">
+                <span class="btn-home__text">Downloads</span>
+                <span class="btn-home__icon">
+                  <i class="fas fa-fw fa-download"></i>
+                </span>
+              </a>
+            </div>
+
+            <div class="user-home__button">
+              <a href="/home/support" class="btn-home btn-home--green">
+                <span class="btn-home__text">Get awasu!supporter</span>
+                <span class="btn-home__icon">
+                  <i class="fas fa-fw fa-heart"></i>
+                </span>
+              </a>
+            </div>
+
+            <div class="user-home__button">
+              <a href="/store/listing" class="btn-home btn-home--pink-darker">
+                <span class="btn-home__text">Connection Guide</span>
+                <span class="btn-home__icon">
+                  <i class="far fa-question-circle"></i>
+                </span>
+              </a>
+            </div>
+          </div>
+
+          <h3 class="user-home__beatmap-list-title">
+            New ranked Beatmaps
+          </h3>
+
+          <div class="user-home__beatmapsets">
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>

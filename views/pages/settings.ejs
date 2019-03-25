@@ -1,0 +1,232 @@
+
+  <div class="osu-layout__section osu-layout__section--full -content home_index">
+    <div class="osu-page osu-page--header">
+      <ul class="page-mode">
+        <li class="page-mode__item">
+          <a href="/" class="
+page-mode-link
+">
+            Home
+
+            <span class="page-mode-link__stripe"></span>
+          </a>
+        </li>
+        <% if (loggedIn) { %>
+          <li class="page-mode__item">
+            <a href="/home/friends" class="
+page-mode-link
+
+">
+              Friends
+
+              <span class="page-mode-link__stripe"></span>
+            </a>
+          </li>
+
+          <li class="page-mode__item">
+            <a href="/home/account/edit" class="
+page-mode-link
+page-mode-link--is-active
+">
+              Settings
+
+              <span class="page-mode-link__stripe"></span>
+            </a>
+          </li>
+        <% } %>
+      </ul>
+
+      <div class="osu-page-header osu-page-header--two-col osu-page-header--home-user -current-user-cover"
+        style="background-image: url(&quot;https://osu.ppy.sh/images/headers/profile-covers/c7.jpg&quot;);">
+        <div class="osu-page-header__box osu-page-header__box--two-col">
+          <h1 class="osu-page-header__title u-ellipsis-overflow">
+            <strong>Settings</strong>
+          </h1>
+        </div>
+
+        <div class="osu-page-header__box osu-page-header__box--status osu-page-header__box--graph">
+          <div class="osu-page-header__status">
+            <div class="osu-page-header__status-label">
+              Registered Users
+            </div>
+            <div class="-forum-topic-watch--unread osu-page-header__status-text">
+              <%= userCount %>
+            </div>
+          </div>
+
+          <div class="osu-page-header__status">
+            <div class="osu-page-header__status-label">
+              Submitted Scores
+            </div>
+            <div class="-forum-topic-watch--unread osu-page-header__status-text">
+                <%= scoreCount %>
+            </div>
+          </div>
+
+          <div class="osu-page-header__status">
+            <div class="osu-page-header__status-label">
+              Beatmaps
+            </div>
+            <div class="osu-page-header__status-text">
+                <%= mapCount %>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+
+  <div class="osu-page osu-page--small u-has-anchor">
+    <div class="account-edit account-edit--first">
+      <div class="account-edit__section">
+        <h2 class="account-edit__section-title">
+          Profile
+        </h2>
+      </div>
+
+      <div class="account-edit__input-groups">
+        <div class="account-edit__input-group">
+          <div class="account-edit-entry account-edit-entry--read-only">
+            <div class="account-edit-entry__label">
+              username
+            </div>
+            <div class="account-edit-entry__input">
+              <%= userData.username %>
+            </div>
+          </div>
+        </div>
+
+        <form action="/userStatsUpdate" method="POST">
+        <div class="account-edit__input-group">
+          <div class="account-edit-entry" data-account-edit-auto-submit="1"
+            data-skip-ajax-error-popup="1">
+            <input class="account-edit-entry__input " name="location"
+              data-last-value="<%= userData.location %> maxlength="100" value="<%= userData.location %>">
+
+            <div class="account-edit-entry__label">
+              Current Location
+            </div>
+
+
+            <span class="account-edit-entry__error -form-error--error"></span>
+          </div>
+          <div class="account-edit-entry" data-account-edit-auto-submit="1"
+            data-skip-ajax-error-popup="1">
+            <input class="account-edit-entry__input -account-edit__input" name="interests"
+              data-last-value="<%= userData.interests %>" maxlength="30" value="<%= userData.interests %>">
+
+            <div class="account-edit-entry__label">
+              interests
+            </div>
+
+            <span class="account-edit-entry__error -form-error--error"></span>
+          </div>
+          <div class="account-edit-entry -account-edit -form-error" data-account-edit-auto-submit="1"
+            data-skip-ajax-error-popup="1">
+            <input class="account-edit-entry__input -account-edit__input" name="occupation"
+              data-last-value="<%= userData.occupation %>" maxlength="30" value="<%= userData.occupation %>">
+
+            <div class="account-edit-entry__label">
+              Occupation
+            </div>
+
+            <span class="account-edit-entry__error -form-error--error"></span>
+          </div>
+        </div>
+        <div class="account-edit__input-group">
+          <div class="account-edit-entry -account-edit -form-error" data-account-edit-auto-submit="1"
+            data-skip-ajax-error-popup="1">
+            <input class="account-edit-entry__input -account-edit__input" name="twitter"
+              data-last-value="<%= userData.twitter %>" maxlength="255" value="<%= userData.twitter %>">
+
+            <div class="account-edit-entry__label">
+              twitter
+            </div>
+
+            <span class="account-edit-entry__error -form-error--error"></span>
+          </div>
+          <div class="account-edit-entry -account-edit -form-error" data-account-edit-auto-submit="1"
+            data-skip-ajax-error-popup="1">
+            <input class="account-edit-entry__input -account-edit__input" name="discord"
+              data-last-value="<%= userData.discord %>" maxlength="37" value="<%= userData.discord %>">
+
+            <div class="account-edit-entry__label">
+              discord
+            </div>
+
+            <span class="account-edit-entry__error -form-error--error"></span>
+          </div>
+          <div class="account-edit-entry -account-edit -form-error" data-account-edit-auto-submit="1"
+            data-skip-ajax-error-popup="1">
+            <input class="account-edit-entry__input -account-edit__input" name="skype"
+              data-last-value="<%= userData.skype %>" maxlength="255" value="<%= userData.skype %>">
+
+            <div class="account-edit-entry__label">
+              skype
+            </div>
+
+            <span class="account-edit-entry__error -form-error--error"></span>
+          </div>
+          <div class="account-edit-entry -account-edit -form-error" data-account-edit-auto-submit="1"
+            data-skip-ajax-error-popup="1">
+            <input class="account-edit-entry__input -account-edit__input" name="website"
+              data-last-value="<%= userData.site %>" maxlength="200" value="<%= userData.site %>">
+
+            <div class="account-edit-entry__label">
+              website
+            </div>
+            
+            <span class="account-edit-entry__error -form-error--error"></span>
+          </div>
+
+          <button class="btn-osu-big btn-osu-big--nav-popup" data-disable-with="Saving...">
+              <div class="btn-osu-big__content">
+                  <span class="btn-osu-big__left">
+                      Save
+                  </span>
+
+                  <span class="fas fa-fw fa-sign-in-alt"></span>
+              </div>
+          </button>
+        </div>
+      </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="osu-page osu-page--small u-has-anchor">
+
+  <form method="POST" action="/userpage" accept-charset="UTF-8" class="account-edit js-account-edit">
+  <div class="account-edit__section">
+      <h2 class="account-edit__section-title">
+          Userpage (BBCode)
+      </h2>
+  </div>
+
+  <div class="account-edit__input-groups">
+      <div class="account-edit__input-group">
+          <div class="account-edit-entry account-edit-entry--wide account-edit-entry--no-label">
+              <textarea class="account-edit-entry__input" name="userpage" rows="6"><%= userData.userpage %></textarea>
+
+          </div>
+
+
+          
+  <button class="btn-osu-big btn-osu-big--nav-popup" data-disable-with="Saving...">
+      <div class="btn-osu-big__content">
+          <span class="btn-osu-big__left">
+              Save
+          </span>
+
+          <span class="fas fa-fw fa-sign-in-alt"></span>
+      </div>
+  </button>
+
+</form>
+      </div>
+
+  </div>
+  </div>

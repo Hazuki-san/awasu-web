@@ -1,0 +1,448 @@
+  <div class="js-react--profile-page osu-layout osu-layout--full" data-react-turbolinks-loaded="1">
+    <div>
+      <div class="osu-layout osu-layout--full">
+        <div class="js-switchable-mode-page--scrollspy js-switchable-mode-page--page" data-page-id="main">
+          <div class="header-v3 header-v3--users">
+            <div class="header-v3__bg"
+              style="background-image: url("/static/img/profile.jpeg");"></div>
+            <div class="header-v3__spinner" data-visibility="hidden">
+              <div class="la-ball-clip-rotate"></div>
+            </div>
+            <div class="header-v3__overlay"></div>
+            <div class="osu-page osu-page--header-v3">
+              <div class="osu-page-header-v3 osu-page-header-v3--users">
+                <div class="osu-page-header-v3__title js-nav2--hidden-on-menu-access">
+                  <div class="osu-page-header-v3__title-icon" style="margin-bottom: 20px;">
+                    <div class="osu-page-header-v3__icon"></div>
+                  </div>
+                  <h1 class="osu-page-header-v3__title-text" style="margin-bottom: 20px;">Player <span
+                      class="osu-page-header-v3__title-highlight" style="margin-bottom: 20px;">Info</span></h1>
+                </div>
+              </div>
+              <div class="game-mode">
+                <ul class="game-mode__items">
+                  <li class="game-mode__item"><a class="game-mode-link <% if (playMode == 0) { %>game-mode-link--active"<% }%>
+                      " href="/users/<%= profileData.id %>?m=0">osu</a></li>
+                  <li class="game-mode__item"><a class="game-mode-link <% if (playMode == 1) { %>game-mode-link--active"
+                      <% } %> " href="/users/<%= profileData.id %>?m=1">osu!taiko</a></li>
+                  <li class="game-mode__item"><a class="game-mode-link <% if (playMode == 2) { %>game-mode-link--active"
+                      <% } %> " href="/users/<%= profileData.id %>?m=2">osu!catch</a></li>
+                  <li class="game-mode__item"><a class="game-mode-link <% if (playMode == 3) { %>game-mode-link--active"
+                      <% } %> " href="/users/<%= profileData.id %>?m=3">osu!mania</a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="osu-page osu-page--users">
+            <div class="profile-header">
+              <div class="profile-header__top">
+                <div class="profile-info">
+                  <div class="profile-info__bg"
+                    style="background-image: background-image: url("/static/img/profile.jpeg");">
+                  </div><a class="profile-info__avatar" <% if (userData.id == profileData.id ) { %>href="/home/account/edit#avatar"<% } %>
+                    <% if (userData.id == profileData.id ) { %>data-orig-title="change your avatar!"<% } %> data-hasqtip="0"
+                    data-vivaldi-spatnav-clickable="1">
+                    <div class="avatar avatar--full" style="background-image: url(https://a.awasu.xyz/<%= profileData.id %>);"></div>
+                  </a>
+                  <div class="profile-info__details">
+                    <h1 class="profile-info__name"><span class="u-ellipsis-overflow"><%= profileData.username %></span>
+                      <div class="profile-info__previous-usernames">
+                        <div class="profile-previous-usernames"><a></span></a>
+                          <div class="prs"><span class=""></span></div>
+                          <div class="profile-previous-usernames__content">
+                            <div class="profile-previous-usernames__title"></div>
+                            <div class="profile-previous-usernames__names"></div>
+                          </div>
+                        </div>
+                      </div>
+                    </h1><span class="profile-info__title">&nbsp;</span>
+                    <div class="profile-info__icon-group">
+                      <div class="profile-info__icons"></div>
+                      <div class="profile-info__icons profile-info__icons--flag"><a
+                          class="profile-info__flag profile-info__flag--country" href="/rankings/osu/performance"><span
+                            class="profile-info__flag-flag"><span class="flag-country flag-country--full"
+                              title="<%= profileData.country %>"
+                              style="background-image: url(https://osu.ppy.sh/images/flags/<%= profileData.country %>.png);"></span></span><span
+                            class="profile-info__flag-text"><%= profileData.country %></span></a></div>
+                    </div>
+                  </div>
+                  <div class="profile-info__bar hidden-xs"></div>
+                </div>
+                <div class="profile-detail-mobile">
+                  <div class="profile-detail-mobile__item profile-detail-mobile__item--rank-chart">
+                  </div>
+                  <div class="profile-detail-mobile__item">
+                    <div class="value-display">
+                      <div class="value-display__label">Global rank</div>
+                      <div class="value-display__value"><%= profileData.stats.rank %></div>
+                    </div>
+                  </div>
+                  <div class="profile-detail-mobile__item">
+                    <div class="value-display">
+                      <div class="value-display__label">Total Hits</div>
+                      <div class="value-display__value"><%= profileData.stats.total_hits %></div>
+                    </div>
+                  </div>
+                  <div class="profile-detail-mobile__item profile-detail-mobile__item--half">
+                    <div class="value-display value-display--medals">
+                      <div class="value-display__label">Medals</div>
+                      <div class="value-display__value">Not added</div>
+                    </div>
+                  </div>
+                  <div class="profile-detail-mobile__item profile-detail-mobile__item--half">
+                    <div class="value-display value-display--pp">
+                      <div class="value-display__label">pp</div>
+                      <div class="value-display__value"><%= profileData.stats.pp %></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="profile-stats">
+                  <dl class="profile-stats__entry">
+                    <dt class="profile-stats__key">Ranked Score</dt>
+                    <dd class="profile-stats__value"><%= profileData.stats.ranked_score %></dd>
+                  </dl>
+                  <dl class="profile-stats__entry">
+                    <dt class="profile-stats__key">Accuracy</dt>
+                    <dd class="profile-stats__value"><%= profileData.stats.accuracy %></dd>
+                  </dl>
+                  <dl class="profile-stats__entry">
+                    <dt class="profile-stats__key">Playcount</dt>
+                    <dd class="profile-stats__value"><%= profileData.stats.playcount %></dd>
+                  </dl>
+                  <dl class="profile-stats__entry">
+                    <dt class="profile-stats__key">Total Score</dt>
+                    <dd class="profile-stats__value"><%= profileData.stats.total_score %></dd>
+                  </dl>
+                  <dl class="profile-stats__entry">
+                    <dt class="profile-stats__key">Total Hits</dt>
+                    <dd class="profile-stats__value"><%= profileData.stats.total_hits %></dd>
+                  </dl>
+                  <dl class="profile-stats__entry">
+                    <dt class="profile-stats__key">Replays seen</dt>
+                    <dd class="profile-stats__value"><%= profileData.stats.replays_watched %></dd>
+                  </dl>
+                </div>
+              </div>
+              <div class="profile-detail">
+                <div class="profile-detail__bar">
+                  <div class="profile-detail-bar">
+                    <div class="profile-detail-bar__column profile-detail-bar__column--left">
+                      <% if (!loggedIn) { %>
+                        <div title="Friends"><button type="button"
+                            class="user-action-button user-action-button--profile-page" disabled=""><span
+                              class="user-action-button__icon-container"><i class="fas fa-user"></i></span><span
+                              class="user-action-button__counter"><%= profileData.subs %></span></button></div>
+                        <% } else { %>
+                          <div class="profile-detail-bar__menu-item">
+                            <% if (userData.id == profileData.id) { %>
+                              <div title="Friends"><button type="button"
+                                  class="user-action-button user-action-button--profile-page" disabled=""><span
+                                    class="user-action-button__icon-container"><i class="fas fa-user"></i></span><span
+                                    class="user-action-button__counter"><%= profileData.subs %></span></button></div>
+                              <% } else { %>
+                                <% if (added) {%>
+                                  <a href="/unfriend?action=user&id=<%= profileData.id %>">
+                                    <div title="Remove friend"><button type="button"
+                                        class="user-action-button user-action-button--profile-page user-action-button--friend"
+                                        disabled=""><span class="user-action-button__icon-container"><i
+                                            class="fas fa-user"></i></span><span
+                                          class="user-action-button__counter"><%= profileData.subs %></span></button></div>
+                                  </a>
+                                  <% } else { %>
+                                    <a href="/friend?action=user&user=<%= profileData.id %>">
+                                      <div title="Add friend"><button type="button"
+                                          class="user-action-button user-action-button--profile-page" disabled=""><span
+                                            class="user-action-button__icon-container"><i
+                                              class="fas fa-user"></i></span><span
+                                            class="user-action-button__counter"><%= profileData.subs %></span></button></div>
+                                    </a>
+                                <% } %>
+                            <% } %>
+                          </div>
+                      <% } %>
+                    </div>
+                    <div class="profile-detail-bar__column profile-detail-bar__column--right">
+                      <div title="Progress of your level"
+                        class="profile-detail-bar__entry profile-detail-bar__entry--level-progress">
+                        <div class="bar bar--user-profile">
+                          <div class="bar__fill" style="width: <%= profileData.stats.level %>%"></div>
+                          <div class="bar__text"><%= profileData.stats.level %>%</div>
+                        </div>
+                      </div>
+                      <div class="profile-detail-bar__entry profile-detail-bar__entry--level">
+                        <div class="profile-detail-bar__level" title="Level <%= profileData.stats.level %>%"><%= profileData.stats.level %></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="">
+                  <div class="profile-detail__row profile-detail__row--top">
+                    <div class="profile-detail__col profile-detail__col--top-left">
+                      <div class="profile-detail__top-left-item">
+                        <div class="value-display value-display--medals">
+                          <div class="value-display__label">Medals</div>
+                          <div class="value-display__value">0</div>
+                        </div>
+                      </div>
+                      <div class="profile-detail__top-left-item">
+                        <div class="value-display value-display--pp">
+                          <div class="value-display__label">pp</div>
+                          <div class="value-display__value"><%= profileData.stats.pp %></div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="profile-detail__col">
+                      <div class="profile-rank-count">
+                        <div class="profile-rank-count__item">
+                          <div class="score-rank-v2 score-rank-v2--XH score-rank-v2--profile-page"></div>0
+                        </div>
+                        <div class="profile-rank-count__item">
+                          <div class="score-rank-v2 score-rank-v2--X score-rank-v2--profile-page"></div>0
+                        </div>
+                        <div class="profile-rank-count__item">
+                          <div class="score-rank-v2 score-rank-v2--SH score-rank-v2--profile-page"></div>0
+                        </div>
+                        <div class="profile-rank-count__item">
+                          <div class="score-rank-v2 score-rank-v2--S score-rank-v2--profile-page"></div>0
+                        </div>
+                        <div class="profile-rank-count__item">
+                          <div class="score-rank-v2 score-rank-v2--A score-rank-v2--profile-page"></div>0
+                        </div>
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="profile-detail__row">
+                    <div class="profile-detail__col profile-detail__col--bottom-left">
+                      <div class="u-full-size line-chart line-chart--profile-page"><svg width="709.4243774414062"
+                          height="135.13157653808594">
+                        </svg>
+                        <div class="line-chart__hover-area" style="top: 15px; right: 15px; bottom: 15px; left: 15px;">
+                          <div class="line-chart__hover" data-visibility="hidden">
+                            <div class="line-chart__hover-line" style=""></div>
+                            <div class="line-chart__hover-circle" style=""></div>
+                            <div class="line-chart__hover-info-box" data-float="right">
+                              <div class="line-chart__hover-info-box-text line-chart__hover-info-box-text--y">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="profile-detail__col profile-detail__col--bottom-right">
+                      <div class="profile-detail__bottom-right-item">
+                        <div class="value-display value-display--large">
+                          <div class="value-display__label">Global Ranking</div>
+                          <div class="value-display__value">#<%= profileData.stats.rank %></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="profile-links">
+                <div class="profile-links__row profile-links__row--0">
+                  <div class="profile-links__item "><span class="js-tooltip-time profile-links__value"
+                      title="<%= new Date(profileData.stats.lastActivity) %>"><%= new Date(profileData.stats.joined) %></span> joined</div>
+                  <div class="profile-links__item ">Last seen <span class=" profile-links__value"><time class="timeago"
+                        datetime="<%= new Date(profileData.stats.lastActivity) %>" title="<%= new Date(profileData.stats.lastActivity) %>"><%= new Date(profileData.stats.lastActivity) %></time></span></div>
+                </div>
+                
+                  <div class="profile-links__row profile-links__row--1">
+                    <% if (profileData.location != "") { %>
+                      <div class="profile-links__item"><span class="profile-links__icon" title="Position"><span
+                            class="fa-fw fas fa-map-marker-alt"></span></span><span
+                          class="profile-links__value"><%= profileData.location %></span></div>
+                    <% } %>
+                    <% if (profileData.interests != "") { %>
+                      <div class="profile-links__item"><span class="profile-links__icon" title="Interests"><span
+                            class="fa-fw far fa-heart"></span></span><span
+                          class="profile-links__value"><%= profileData.interests %></span></div>
+                    <% } %>
+                    <% if (profileData.occupation != "") { %>
+                      <div class="profile-links__item"><span class="profile-links__icon" title="Work as"><span
+                            class="fa-fw fas fa-suitcase"></span></span><span
+                          class="profile-links__value"><%= profileData.occupation %></span>
+                    <% } %>
+                  </div>
+              </div>
+              <% if (profileData.twitter != "") { %>
+                <div class="profile-links__item"><span class="profile-links__icon" title="Twitter"><span
+                      class="fa-fw fab fa-twitter"></span></span><a href="https://twitter.com/<%= profileData.twitter %>"
+                    class="profile-links__value profile-links__value--link"><%= profileData.twitter %></a></div>
+              <% } %>
+              <% if (profileData.discord != "") { %>
+                <div class="profile-links__item"><span class="profile-links__icon" title="Discord"><span
+                      class="fa-fw fab fa-discord"></span></span><span class="profile-links__value"><span
+                      class="click-to-copy click-to-copy--profile-header-extra" data-tooltip-pin-position="true"
+                      data-tooltip-position="bottom center" href="#"><%= profileData.discord %></span></span></div>
+              <% } %>
+              <% if (profileData.skype != "") { %>
+                <div class="profile-links__item"><span class="profile-links__icon" title="Skype"><span
+                      class="fa-fw fab fa-skype"></span></span><a href="skype:<%= profileData.skype %>?chat"
+                    class="profile-links__value profile-links__value--link"><%= profileData.skype %></a></div>
+              <% } %>
+              <% if (profileData.site != "") {%>
+                <div class="profile-links__item"><span class="profile-links__icon" title="Website"><span
+                      class="fa-fw fas fa-link"></span></span><a href="<%= profileData.site %>"
+                    class="profile-links__value profile-links__value--link"><%= profileData.site %></a></div>
+              <% } %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hidden-xs page-extra-tabs page-extra-tabs--profile-page js-switchable-mode-page--scrollspy-offset">
+      <div class="osu-page">
+        <div class="page-mode page-mode--profile-page-extra ui-sortable" data-vivaldi-spatnav-clickable="1"><% if (profileData.userpage != "") { %><a
+            class="page-mode__item js-sortable--tab ui-sortable-handle" data-page-id="me" href="#me"><span
+              class="page-mode-link page-mode-link--profile-page"><span class="fake-bold"
+                data-content="Userpage">Userpage</span><span class="page-mode-link__stripe"></span></span></a><% } %><a
+            class="page-mode__item js-sortable--tab ui-sortable-handle" data-page-id="top_ranks" href="#top_ranks"><span
+              class="page-mode-link page-mode-link--profile-page"><span class="fake-bold"
+                data-content="Scores">Scores</span><span class="page-mode-link__stripe"></span></span></a><a
+            class="page-mode__item js-sortable--tab ui-sortable-handle" data-page-id="medals" href="#medals"><span
+              class="page-mode-link page-mode-link--profile-page"><span class="fake-bold"
+                data-content="Medals">Medals</span><span class="page-mode-link__stripe"></span></span></a></div>
+      </div>
+    </div>
+    <div class="osu-layout__section osu-layout__section--users-extra">
+      <div class="osu-layout__row ui-sortable" data-vivaldi-spatnav-clickable="1">
+        <% if (profileData.userpage != "") { %>
+          <div data-page-id="me"
+            class="js-switchable-mode-page--scrollspy js-switchable-mode-page--page js-sortable--page undefined">
+            <div class="page-extra page-extra--userpage">
+              <div>
+                <h2 class="page-extra__title">Userpage</h2>
+              </div>
+              <div class="page-extra__content-overflow-wrapper-outer">
+                <div class="page-extra__content-overflow-wrapper-inner">
+                  <div>
+                    <div class="bbcode bbcode--profile-page">
+                      <%= profileData.bbcode %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        <% } %>
+
+        <div data-page-id="top_ranks"
+          class="js-switchable-mode-page--scrollspy js-switchable-mode-page--page js-sortable--page undefined">
+          <div class="page-extra">
+            <div>
+              <h2 class="page-extra__title">Scores</h2>
+            </div>
+            <div>
+              <h3 class="page-extra__title page-extra__title--small">Best Scores</h3>
+              <div class="profile-extra-entries">
+                <div class="play-detail-list">
+                <% topScores.forEach(score => { %>
+                  <div class="play-detail play-detail--highlightable play-detail--compact">
+                    <div class="play-detail__group play-detail__group--top">
+                      <div class="play-detail__detail"><a href="/beatmaps/<%= score.beatmap_id %>"
+                          class="play-detail__title u-ellipsis-overflow"> <small
+                            class="play-detail__artist"><%= score.song_name %></small></a>
+                      </div><button class="play-detail__compact-toggle"><span
+                          class="fas fa-chevron-down"></span></button>
+                    </div>
+                    <div class="play-detail__group play-detail__group--bottom">
+                      <div class="play-detail__score-detail play-detail__score-detail--score">
+                        <div class="play-detail__icon play-detail__icon--extra">
+                          <div class="score-rank-v2 score-rank-v2--full score-rank-v2--A"></div>
+                        </div>
+                        <div class="play-detail__score-detail-top-right">
+                          <div class="play-detail__accuracy-and-weighted-pp"><span
+                              class="play-detail__accuracy"><%= score.accuracy %>%</span><span
+                              class="play-detail__weighted-pp"><%= score.pp %>pp</span></div>
+                        </div>
+                      </div>
+                      <div class="play-detail__pp"><span><%= score.pp %><span class="play-detail__pp-unit">pp</span></span></div>
+                      <div class="play-detail__more">
+                        <a href="/web/replays/<%= score.id %>"><div class="play-detail-menu"><button class="play-detail-menu__button" type="button"><i
+                              class="fas fa-download"></i></button></div></a>
+                      </div>
+                    </div>
+                  </div>
+                <% })%>
+                <% if (topScores.length < 1) {%>
+                  <p>There are no best plays</p>
+            <% }%>
+                </div>
+
+                <h3 class="page-extra__title page-extra__title--small">Last Scores</h3>
+                <div class="profile-extra-entries">
+                  <div class="play-detail-list">
+                  <% recentScores.forEach(score => {%>
+                    <div class="play-detail play-detail--highlightable play-detail--compact">
+                      <div class="play-detail__group play-detail__group--top">
+                        <div class="play-detail__detail"><a href="/beatmaps/<%= score.beatmap_id %>"
+                            class="play-detail__title u-ellipsis-overflow"> <small
+                              class="play-detail__artist"><%= score.song_name %></small></a>
+                        </div>
+                      </div>
+                      <div class="play-detail__group play-detail__group--bottom">
+                        <div class="play-detail__score-detail play-detail__score-detail--score">
+                          <div class="play-detail__score-detail-top-right">
+                            <div class="play-detail__accuracy-and-weighted-pp"><span
+                                class="play-detail__accuracy"><%= score.accuracy %></span><span
+                                class="play-detail__weighted-pp"><%= score.pp %>pp</span></div>
+                          </div>
+                        </div>
+                        <div class="play-detail__pp"><span><%= score.pp %><span class="play-detail__pp-unit">pp</span></span></div>
+                        <div class="play-detail__more">
+                          <a href="/web/replays/<%= score.id %>"><div class="play-detail-menu"><button class="play-detail-menu__button" type="button"><i
+                                class="fas fa-download"></i></button></div></a>
+                        </div>
+                      </div>
+                    </div>
+                  <% }) %>
+                  <% if (recentScores.length < 1) { %>
+                  <p>There are no latest plays</p>
+              <% } %>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div data-page-id="medals"
+          class="js-switchable-mode-page--scrollspy js-switchable-mode-page--page js-sortable--page undefined">
+          <div class="page-extra">
+            <div>
+              <h2 class="page-extra__title">Medals</h2>
+            </div>
+            <div class="page-extra__recent-medals-box">
+              <div class="page-extra__recent-medals">
+                not implemented
+              
+              </div>
+            </div>
+            
+          </div>
+        </div>
+
+        <div data-page-id="kudosu"
+          class="js-switchable-mode-page--scrollspy js-switchable-mode-page--page js-sortable--page undefined">
+          <div class="page-extra">
+            <div>
+              <h2 class="page-extra__title">Contribution points!</h2><span
+                class="page-extra__dragdrop-toggle hidden-xs js-profile-page-extra--sortable-handle ui-sortable-handle"><i
+                  class="fas fa-bars"></i></span>
+            </div>
+            <div class="kudosu-box">
+              <div class="value-display value-display--kudosu">
+                <div class="value-display__label">Your points</div>
+                <div class="value-display__value">0</div>
+                <div class="value-display__description"><span>Earn contribution points by helping the Awasu Team</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>

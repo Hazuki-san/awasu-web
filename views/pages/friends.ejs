@@ -1,0 +1,149 @@
+  <div class="osu-layout__section osu-layout__section--full js-content home_index">
+    <div class="osu-page osu-page--header">
+      <ul class="page-mode">
+        <li class="page-mode__item">
+          <a href="/" class="
+page-mode-link
+">
+            Home
+
+            <span class="page-mode-link__stripe"></span>
+          </a>
+        </li>
+        <% if (loggedIn) {%>
+          <li class="page-mode__item">
+            <a href="/home/friends" class="
+page-mode-link
+page-mode-link--is-active
+">
+              Friends
+
+              <span class="page-mode-link__stripe"></span>
+            </a>
+          </li>
+
+          <li class="page-mode__item">
+            <a href="/home/account/edit" class="
+page-mode-link
+
+">
+              Settings
+
+              <span class="page-mode-link__stripe"></span>
+            </a>
+          </li>
+        <% } %>
+      </ul>
+        <div class="osu-page-header osu-page-header--two-col osu-page-header--home-user js-current-user-cover"
+        style="background-image: url(&quot;https://osu.ppy.sh/images/headers/profile-covers/c7.jpg&quot;);">
+        <div class="osu-page-header__box osu-page-header__box--two-col">
+          <h1 class="osu-page-header__title u-ellipsis-overflow">
+              <strong>Friends</strong>
+          </h1>
+        </div>
+
+        <div class="osu-page-header__box osu-page-header__box--status osu-page-header__box--graph">
+          <div class="osu-page-header__status">
+            <div class="osu-page-header__status-label">
+              Registered Users
+            </div>
+            <div class="js-forum-topic-watch--unread osu-page-header__status-text">
+              <%= userCount %>
+            </div>
+          </div>
+
+          <div class="osu-page-header__status">
+            <div class="osu-page-header__status-label">
+              Submitted Scores
+            </div>
+            <div class="js-forum-topic-watch--unread osu-page-header__status-text">
+                <%= scoreCount %>
+            </div>
+          </div>
+
+          <div class="osu-page-header__status">
+            <div class="osu-page-header__status-label">
+              Beatmaps
+            </div>
+            <div class="osu-page-header__status-text">
+                <%= mapCount %>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  
+
+  <div class="osu-page osu-page--generic osu-page--small osu-page--dark-bg">
+    <div class="user-friends">
+      <div class="usercard-list">
+        <div class="usercard-list__cards">
+
+            <% userFriends.forEach(friend => { %>
+
+
+
+              <div class="usercard">
+                <a href="/users/<%= friend.user2 %>" class="usercard__background-container">
+                  <img class="usercard__background" src="https://osu.ppy.sh/images/headers/profile-covers/c2.jpg">
+                  <div class="usercard__background-overlay"></div>
+                </a>
+                <div class="usercard__card">
+                  <div class="usercard__card-content">
+                    <div class="usercard__avatar-space">
+                      <div class="usercard__avatar usercard__avatar--loader js-usercard--avatar-loader">
+                        <div class="la-ball-clip-rotate"></div>
+                      </div>
+                      <img class="usercard__avatar usercard__avatar--main"
+                        src="https://a.awasu.xyz/<%= friend.user2 %>">
+                    </div>
+                    <div class="usercard__metadata">
+                      <div class="usercard__username"><%= friend.username %></div>
+                      <a href="/unfriend?action=friend&id=<%= friend.user2 %>"><div class="usercard__icons">
+                        <div class="usercard__icon js-react--friendButton" data-target="<%= friend.user2 %>"
+                          data-react-turbolinks-loaded="1">
+                        
+                          <div><button type="button"
+                              class="user-action-button user-action-button--friend"><span
+                                class="user-action-button__icon-container"><span
+                                  class="user-action-button__icon user-action-button__icon--hover-visible"><i
+                                    class="fas fa-user-times"></i></span><span
+                                  class="user-action-button__icon user-action-button__icon--hover-hidden"><i
+                                    class="fas fa-user"></i></span></span></button></div>
+
+                                
+                        </div>
+                      </a>
+                      </div>
+                    </div>
+                  </div>
+                  <% if ((friend.latest_activity - Math.floor(new Date().getTime() / 1000)) < 300 && (friend.latest_activity - Math.floor(new Date().getTime() / 1000)) > 0) {%>
+                  <div class="usercard__status-bar usercard__status-bar--online">
+                    <span class="far fa-fw fa-circle usercard__status-icon"></span>
+                    <span class="usercard__status-message">
+                      Online
+                    </span>
+                  </div>
+                  <% } else { %>
+                  <div class="usercard__status-bar usercard__status-bar--offline">
+                    <span class="far fa-fw fa-circle usercard__status-icon"></span>
+                    <span class="usercard__status-message" title="">
+                        Offline
+                    </span>
+                </div>
+                <% } %>
+                </div>
+              </div>
+              
+            <% }) %>
+
+            <% if (userFriends.length == 0) { %>
+            <h3>You don't have any friends :(</h3>
+          <% } %>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</a>

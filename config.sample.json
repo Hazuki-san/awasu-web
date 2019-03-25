@@ -1,0 +1,13 @@
+{
+    "db": {
+        "username": "root",
+        "password": "",
+        "database": "ripple",
+        "host": "localhost"
+    },
+    "site": {
+        "port": 80,
+        "osuApiKey": "",
+        "secret": ""
+    }
+}
