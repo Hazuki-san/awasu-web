@@ -19,7 +19,7 @@ app.get("/register", async (req, res) => {
 
 app.post("/register", async (req, res) => {
     let username = req.body.username;
-    let password = await passwordHelper.hashPassword(md5(req.body.password[0]));
+    let password = await md5(req.body.password[0]);
     let email = req.body.email;
     if (req.body.password[0] != req.body.password[1]) {
         res.redirect("/register?e=passwordErr");
@@ -29,6 +29,7 @@ app.post("/register", async (req, res) => {
         res.redirect("/register?e=notAllFilled")
         return;
     }
+    bcrypt.hash(password, 10, function(err, hash) {
 
     let usernameSafe = username.toLowerCase().replace(" ", "_");
     let unixTime = Math.floor(new Date().getTime() / 1000)
@@ -40,10 +41,11 @@ app.post("/register", async (req, res) => {
         return;
     }
     console.log(email)
-    await query("INSERT INTO users(username, username_safe, password_md5, salt, email, register_datetime, privileges) VALUES(?,?,?,'',?,?,?)", username, usernameSafe, password, email, unixTime, 1048576)
+    await query("INSERT INTO users(username, username_safe, password_md5, salt, email, register_datetime, privileges) VALUES(?,?,?,'',?,?,?)", username, usernameSafe, hash, email, unixTime, 1048576)
     await query("INSERT INTO users_stats(username) VALUES(?)", username);
     res.redirect("/verification");
     res.end();
+    });
 })
 
 passport.serializeUser(function (uid, done) {
