@@ -165,12 +165,12 @@
                       <div title="Progress of your level"
                         class="profile-detail-bar__entry profile-detail-bar__entry--level-progress">
                         <div class="bar bar--user-profile">
-                          <div class="bar__fill" style="width: <%= profileData.stats.level %>%"></div>
-                          <div class="bar__text"><%= profileData.stats.level %>%</div>
+                          <div class="bar__fill" style="width: <%= Math.round(profileData.stats.level - Math.round(profileData.stats.level), 2) %>%"></div>
+                          <div class="bar__text"><%= Math.round(profileData.stats.level) %>%</div>
                         </div>
                       </div>
                       <div class="profile-detail-bar__entry profile-detail-bar__entry--level">
-                        <div class="profile-detail-bar__level" title="Level <%= profileData.stats.level %>%"><%= profileData.stats.level %></div>
+                        <div class="profile-detail-bar__level" title="Level <%= Math.round(profileData.stats.level) %>%"><%= Math.round(profileData.stats.level) %></div>
                       </div>
                     </div>
                   </div>
