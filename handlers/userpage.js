@@ -1,6 +1,7 @@
 const { query } = require("../db");
 const playerHelper = require("../utils/playerHelper");
 const passport = require("passport");
+const requestHelper = require("../utils/requestHelper");
 
 async function handle(req, res) {
     let registeredUsers = await query("SELECT count(id) as userCount FROM users");
@@ -67,8 +68,11 @@ async function handle(req, res) {
 			isFriend = true;
 		}
 	}
-	let topScores = await query("SELECT pp, accuracy, song_name, beatmap_id, scores.id  FROM scores INNER JOIN beatmaps ON scores.beatmap_md5 = beatmaps.beatmap_md5 WHERE completed = 3 AND userid = ? ORDER BY pp DESC", req.params.id);
-	let recentScores = await query("SELECT pp, accuracy, song_name, beatmap_id, scores.id  FROM scores INNER JOIN beatmaps ON scores.beatmap_md5 = beatmaps.beatmap_md5 WHERE userid = ? ORDER BY time DESC", req.params.id)
+	let request = await requestHelper.request_get("http://awasu.xyz/api/v1/users/scores/best?id="+id+"&mode="+mode);
+    let topScores = JSON.parse(request.body);
+    let requestRecent = await requestHelper.request_get("http://awasu.xyz/api/v1/users/scores/recent?id="+id+"&mode="+mode);
+    let recentScores = JSON.parse(requestRecent.body);
+
     res.render("base", {
         page: "Userpage",
         loggedIn: req.isAuthenticated(),
