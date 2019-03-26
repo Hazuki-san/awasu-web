@@ -343,9 +343,9 @@
                 <% topScores.forEach(score => { %>
                   <div class="play-detail play-detail--highlightable play-detail--compact">
                     <div class="play-detail__group play-detail__group--top">
-                      <div class="play-detail__detail"><a href="/beatmaps/<%= score.beatmap_id %>"
+                      <div class="play-detail__detail"><a href="/beatmaps/<%= score.beatmap.beatmap_id %>"
                           class="play-detail__title u-ellipsis-overflow"> <small
-                            class="play-detail__artist"><%= score.song_name %></small></a>
+                            class="play-detail__artist"><%= score.beatmap.song_name %></small></a>
                       </div><button class="play-detail__compact-toggle"><span
                           class="fas fa-chevron-down"></span></button>
                     </div>
@@ -356,7 +356,7 @@
                         </div>
                         <div class="play-detail__score-detail-top-right">
                           <div class="play-detail__accuracy-and-weighted-pp"><span
-                              class="play-detail__accuracy"><%= score.accuracy %>%</span><span
+                              class="play-detail__accuracy"><%= Math.round(score.accuracy, 2) %>%</span><span
                               class="play-detail__weighted-pp"><%= Math.round(score.pp, 2) %>pp</span></div>
                         </div>
                       </div>
@@ -379,20 +379,20 @@
                   <% recentScores.forEach(score => {%>
                     <div class="play-detail play-detail--highlightable play-detail--compact">
                       <div class="play-detail__group play-detail__group--top">
-                        <div class="play-detail__detail"><a href="/beatmaps/<%= score.beatmap_id %>"
+                        <div class="play-detail__detail"><a href="/beatmaps/<%= score.beatmap.beatmap_id %>"
                             class="play-detail__title u-ellipsis-overflow"> <small
-                              class="play-detail__artist"><%= score.song_name %></small></a>
+                              class="play-detail__artist"><%= score.beatmap.song_name %></small></a>
                         </div>
                       </div>
                       <div class="play-detail__group play-detail__group--bottom">
                         <div class="play-detail__score-detail play-detail__score-detail--score">
                           <div class="play-detail__score-detail-top-right">
                             <div class="play-detail__accuracy-and-weighted-pp"><span
-                                class="play-detail__accuracy"><%= score.accuracy %></span><span
+                                class="play-detail__accuracy"><%= Math.round(score.accuracy, 2) %></span><span
                                 class="play-detail__weighted-pp"><%=  Math.round(score.pp, 2) %>pp</span></div>
                           </div>
                         </div>
-                        <div class="play-detail__pp"><span><%= score.pp %><span class="play-detail__pp-unit">pp</span></span></div>
+                        <div class="play-detail__pp"><span><%= Math.round(score.pp, 2) %><span class="play-detail__pp-unit">pp</span></span></div>
                         <div class="play-detail__more">
                           <a href="/web/replays/<%= score.id %>"><div class="play-detail-menu"><button class="play-detail-menu__button" type="button"><i
                                 class="fas fa-download"></i></button></div></a>
