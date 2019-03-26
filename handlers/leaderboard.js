@@ -50,5 +50,11 @@ async function handle(req, res) {
         mapCount: mapCount
     });
 }
+passport.serializeUser(function (uid, done) {
+    done(null, uid);
+});
 
+passport.deserializeUser(function (uid, done) {
+    done(null, uid);
+});
 module.exports = handle;
