@@ -72,7 +72,7 @@ async function handle(req, res) {
     let topScores = JSON.parse(request.body);
     let requestRecent = await requestHelper.request_get("http://awasu.xyz/api/v1/users/scores/recent?id="+id+"&mode="+mode);
     let recentScores = JSON.parse(requestRecent.body);
-    console.log(topScores.scores)
+    
     res.render("base", {
         page: "Userpage",
         loggedIn: req.isAuthenticated(),
