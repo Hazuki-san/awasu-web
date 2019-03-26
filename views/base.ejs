@@ -229,7 +229,7 @@
                 </li>
                 <li class="navbar-mobile-item dropdown">
                     <a data-toggle="dropdown" class="navbar-mobile-item__main dropdown-toggle"
-                        href="/rankings/osu/performance">
+                        href="/leaderboard">
                         <span
                             class="navbar-mobile-item__icon navbar-mobile-item__icon--main navbar-mobile-item__icon--closed">
                             <i class="fas fa-chevron-right"></i>
@@ -245,7 +245,7 @@
 
                     <ul class="dropdown-menu" role="menu" aria-labelledby="expand-rankings">
                         <li>
-                            <a class="navbar-mobile-item__submenu" href="/rankings/osu/performance"
+                            <a class="navbar-mobile-item__submenu" href="/leaderboard"
                                 data-toggle="collapse" data-target=".js-navbar-mobile--menu">
                                 <span class="navbar-mobile-item__icon">
                                     <i class="fas fa-chevron-right"></i>
@@ -254,26 +254,7 @@
                                 performance
                             </a>
                         </li>
-                        <li>
-                            <a class="navbar-mobile-item__submenu" href="/rankings/osu/score" data-toggle="collapse"
-                                data-target=".js-navbar-mobile--menu">
-                                <span class="navbar-mobile-item__icon">
-                                    <i class="fas fa-chevron-right"></i>
-                                </span>
-
-                                score
-                            </a>
-                        </li>
-                        <li>
-                            <a class="navbar-mobile-item__submenu" href="/rankings/osu/clans" data-toggle="collapse"
-                                data-target=".js-navbar-mobile--menu">
-                                <span class="navbar-mobile-item__icon">
-                                    <i class="fas fa-chevron-right"></i>
-                                </span>
-
-                                clans
-                            </a>
-                        </li>
+                
                     </ul>
                 </li>
 
@@ -620,6 +601,9 @@
     <% } %>
     <% if (page === "Verify") { %> 
         <% include pages/verify.ejs %>
+    <% } %>
+    <% if (page === "Leaderboard") { %> 
+        <% include pages/leaderboard.ejs %>
     <% } %>
     
     <br>

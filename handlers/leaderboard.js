@@ -5,17 +5,17 @@ const requestHelper = require("../utils/requestHelper");
 
 async function handle(req, res) {
     let mode; 
-    switch (req.params.m) {
-    	case "osu/performance":
+    switch (req.query.m) {
+    	case 0:
     		mode = 0;
     	break;
-    	case "taiko/performance":
+    	case 1:
     		mode = 1;
     	break;
-    	case "fruits/performance":
+    	case 2:
     		mode = 2;
     	break;
-    	case "mania/performance":
+    	case 3:
     		mode = 3;
     	break;
     	default:

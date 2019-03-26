@@ -33,7 +33,7 @@ app.use(require("./handlers/register"))
 app.use(require("./handlers/settings"))
 app.use(require("./handlers/logout"))
 app.use(require("./handlers/verify"))
-app.get("/rankings/:m", require("./handlers/leaderboard"));
+app.get("/leaderboard", require("./handlers/leaderboard"));
 app.get("/users/:id", require("./handlers/userpage"));
 app.get("/u/:id", require("./handlers/userpage"));
 
