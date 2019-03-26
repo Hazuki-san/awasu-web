@@ -1,697 +1,101 @@
-<html style="--vh:9.98px;">
-
-        <head>
-            <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-            <style type="text/css">
-                .turbolinks-progress-bar {
-                    position: fixed;
-                    display: block;
-                    top: 0;
-                    left: 0;
-                    height: 3px;
-                    background: #0076ff;
-                    z-index: 9999;
-                    transition: width 300ms ease-out, opacity 150ms 150ms ease-in;
-                    transform: translate3d(0, 0, 0);
-                }
-            </style>
-        
-        
-            <!-- Title -->
-            <title><%= page %> - Awasu</title>
-        
-            <!-- Style -->
-            <link href="/static/css/style.css" rel="stylesheet" type="text/css">
-            <link href="/static/css/style2.css" rel="stylesheet" type="text/css">
-        
-            <link rel="stylesheet" media="all" href="/static/css/default-skin.css">
-            <link rel="stylesheet" media="all" href="/static/css/app.css">
-        
-            <script>
-                var currentLocale = "en";
-                var fallbackLocale = "en";
-            </script>
-        
-            <script src="/static/js/vendor.js"></script>
-            <script src="/static/js/app-deps.js"></script>
-            <script src="/static/js/app.js"></script>
-            <!-- <script src="./static/js/jquery.timeago.js"></script> -->
-        
-            <link rel="apple-touch-icon" sizes="180x180" href="https://s.ppy.sh/apple-touch-icon.png">
-            <link rel="icon" sizes="32x32" href="https://s.ppy.sh/favicon-32x32.png">
-            <link rel="icon" sizes="16x16" href="https://s.ppy.sh/favicon-16x16.png">
-            <link rel="manifest" href="https://s.ppy.sh/site.webmanifest">
-            <link rel="mask-icon" href="https://s.ppy.sh/safari-pinned-tab.svg" color="#e2609a">
-            <meta name="msapplication-TileColor" content="#603cba">
-            <meta name="theme-color" content="#cc5288">
-            <meta name="description"
-                content="osu! - Der Rhythmus ist nur einen *Klick* entfernt!  Mit Ouendan/EBA, Taiko und eigenen Spielmodi, zusätzlich zu einem voll funktionalen Leveleditor">
-            <meta name="keywords"
-                content="osu, peppy, ouendan, elite, beat, agents, ds, windows, game, taiko, tatsujin, simulator, sim, xna, ddr, beatmania, osu!, osume">
-            <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
-                integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
-            <link rel="stylesheet" type="text/css"
-                href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css" />
-            <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js"></script>
-            <script>
-                window.addEventListener("load", function () {
-                    window.cookieconsent.initialise({
-                        "palette": {
-                            "popup": {
-                                "background": "#000"
-                            },
-                            "button": {
-                                "background": "#f1d600"
-                            }
-                        }
-                    })
-                });
-            </script>
-        
-        </head>
-        
-        <body
-            class="<% if (page == 'Userpage') { %> osu-layout osu-layout--body t-section-community action-profile osu-layout--body-222-plain<% } else { %>osu-layout osu-layout--body t-section-home action-index<% } %>">
-            <div id="overlay" class="blackout blackout--overlay" style="display: none;"></div>
-            <div class="blackout js-blackout" data-visibility="hidden"></div>
-            <div class="visible-xs no-print js-header--main">
-                <div class="navbar-mobile-before"></div>
-        
-                <div class="
-                        navbar-mobile
-                        u-section--bg
-                    " role="navigation">
-                    <div class="container">
-                        <div class="navbar-header navbar-mobile__header">
-                            <div class="navbar-mobile__header-section">
-                                <a class="navbar-mobile__logo" href="/"></a>
-                                <span class="navbar-mobile__brand navbar-brand u-ellipsis-overflow">
-                                    <%= page %> 
-                                </span>
-                            </div>
-        
-        
-                            <div class="navbar-mobile__header-section navbar-mobile__header-section--buttons">
-                                <% if (loggedIn) {%>
-                                    <a href="/users/<%= userData.id %>" class="avatar avatar--navbar-mobile js-navbar-mobile--top-icon"
-                                        style="background-image: url(https://a.awasu.xyz/<%= userData.id %>);">
-                                    </a>
-                                <% } %>
-                                <button type="button" class="navbar-toggle navbar-mobile__toggle u-section--color-hover"
-                                    data-toggle="collapse" data-target="#xs-navbar">
-                                    <span class="sr-only">Toggle navigation</span>
-                                    <span class="navbar-mobile__toggle-icon">
-                                        <i class="fas fa-bars"></i>
-                                    </span>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-        
-                <div class="collapse navbar-mobile__menu js-navbar-mobile--menu" id="xs-navbar">
-                    <ul class="nav navbar-nav navbar-mobile__menu-items">
-                        <% if (loggedIn) { %>
-                            <li class="navbar-mobile-item navbar-mobile-item--user">
-                                <a class="navbar-mobile-item__main navbar-mobile-item__main--user" href="/users/<%= userData.id %>"
-                                    data-toggle="collapse" data-target=".js-navbar-mobile--menu">
-                                    <span class="avatar avatar--navbar-mobile"
-                                        style="background-image: url(https://a.awasu.xyz/<%= userData.id %>);"></span>
-        
-                                        <%= userData.username %>
-                                </a>
-        
-                                <button class="navbar-mobile-item__main navbar-mobile-item__main--logout js-logout-link"
-                                    type="button" data-url="/session" data-method="DELETE"
-                                    data-confirm="Sicher, dass du dich ausloggen willst? :(" data-remote="1"
-                                    data-toggle="collapse" data-target=".js-navbar-mobile--menu">
-                                    <i class="fas fa-sign-out-alt"></i>
-                                </button>
-                            </li>
-                        <% } %>
-        
-                        <li class="navbar-mobile-item dropdown">
-                            <a data-toggle="dropdown" class="navbar-mobile-item__main dropdown-toggle" href="/">
-                                <span
-                                    class="navbar-mobile-item__icon navbar-mobile-item__icon--main navbar-mobile-item__icon--closed">
-                                    <i class="fas fa-chevron-right"></i>
-                                </span>
-        
-                                <span
-                                    class="navbar-mobile-item__icon navbar-mobile-item__icon--main navbar-mobile-item__icon--opened">
-                                    <i class="fas fa-chevron-down"></i>
-                                </span>
-        
-                                home
-                            </a>
-        
-                            <ul class="dropdown-menu" role="menu" aria-labelledby="expand-home">
-                                <li>
-                                    <a class="navbar-mobile-item__submenu" href="home/team" data-toggle="collapse"
-                                        data-target=".js-navbar-mobile--menu">
-                                        <span class="navbar-mobile-item__icon">
-                                            <i class="fas fa-chevron-right"></i>
-                                        </span>
-        
-                                        team
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="navbar-mobile-item__submenu" href="/home/changelog" data-toggle="collapse"
-                                        data-target=".js-navbar-mobile--menu">
-                                        <span class="navbar-mobile-item__icon">
-                                            <i class="fas fa-chevron-right"></i>
-                                        </span>
-        
-                                        changelog
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="navbar-mobile-item__submenu" href="/home/download" data-toggle="collapse"
-                                        data-target=".js-navbar-mobile--menu">
-                                        <span class="navbar-mobile-item__icon">
-                                            <i class="fas fa-chevron-right"></i>
-                                        </span>
-        
-                                        download
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="navbar-mobile-item__submenu" href="/home/search" data-toggle="collapse"
-                                        data-target=".js-navbar-mobile--menu">
-                                        <span class="navbar-mobile-item__icon">
-                                            <i class="fas fa-chevron-right"></i>
-                                        </span>
-        
-                                        search
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="navbar-mobile-item dropdown">
-                            <a data-toggle="dropdown" class="navbar-mobile-item__main dropdown-toggle" href="/beatmapsets">
-                                <span
-                                    class="navbar-mobile-item__icon navbar-mobile-item__icon--main navbar-mobile-item__icon--closed">
-                                    <i class="fas fa-chevron-right"></i>
-                                </span>
-        
-                                <span
-                                    class="navbar-mobile-item__icon navbar-mobile-item__icon--main navbar-mobile-item__icon--opened">
-                                    <i class="fas fa-chevron-down"></i>
-                                </span>
-        
-                                beatmaps
-                            </a>
-        
-                            <ul class="dropdown-menu" role="menu" aria-labelledby="expand-beatmaps">
-                                <li>
-                                    <a class="navbar-mobile-item__submenu" href="/beatmapsets" data-toggle="collapse"
-                                        data-target=".js-navbar-mobile--menu">
-                                        <span class="navbar-mobile-item__icon">
-                                            <i class="fas fa-chevron-right"></i>
-                                        </span>
-        
-                                        listing
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="navbar-mobile-item__submenu" href="/beatmaps/packs" data-toggle="collapse"
-                                        data-target=".js-navbar-mobile--menu">
-                                        <span class="navbar-mobile-item__icon">
-                                            <i class="fas fa-chevron-right"></i>
-                                        </span>
-        
-                                        packs
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="navbar-mobile-item dropdown">
-                            <a data-toggle="dropdown" class="navbar-mobile-item__main dropdown-toggle"
-                                href="/leaderboard">
-                                <span
-                                    class="navbar-mobile-item__icon navbar-mobile-item__icon--main navbar-mobile-item__icon--closed">
-                                    <i class="fas fa-chevron-right"></i>
-                                </span>
-        
-                                <span
-                                    class="navbar-mobile-item__icon navbar-mobile-item__icon--main navbar-mobile-item__icon--opened">
-                                    <i class="fas fa-chevron-down"></i>
-                                </span>
-        
-                                leaderboards
-                            </a>
-        
-                            <ul class="dropdown-menu" role="menu" aria-labelledby="expand-rankings">
-                                <li>
-                                    <a class="navbar-mobile-item__submenu" href="/leaderboard"
-                                        data-toggle="collapse" data-target=".js-navbar-mobile--menu">
-                                        <span class="navbar-mobile-item__icon">
-                                            <i class="fas fa-chevron-right"></i>
-                                        </span>
-        
-                                        performance
-                                    </a>
-                                </li>
-                        
-                            </ul>
-                        </li>
-        
-                        <li class="navbar-mobile-item dropdown">
-                            <a data-toggle="dropdown" class="navbar-mobile-item__main dropdown-toggle"
-                                href="/help/wiki/Welcome">
-                                <span
-                                    class="navbar-mobile-item__icon navbar-mobile-item__icon--main navbar-mobile-item__icon--closed">
-                                    <i class="fas fa-chevron-right"></i>
-                                </span>
-        
-                                <span
-                                    class="navbar-mobile-item__icon navbar-mobile-item__icon--main navbar-mobile-item__icon--opened">
-                                    <i class="fas fa-chevron-down"></i>
-                                </span>
-        
-                                help
-                            </a>
-        
-                            <ul class="dropdown-menu" role="menu" aria-labelledby="expand-help">
-                                <li>
-                                    <a class="navbar-mobile-item__submenu" href="/help/wiki/Welcome" data-toggle="collapse"
-                                        data-target=".js-navbar-mobile--menu">
-                                        <span class="navbar-mobile-item__icon">
-                                            <i class="fas fa-chevron-right"></i>
-                                        </span>
-        
-                                        wiki
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="navbar-mobile-item__submenu" href="/help/wiki/FAQ" data-toggle="collapse"
-                                        data-target=".js-navbar-mobile--menu">
-                                        <span class="navbar-mobile-item__icon">
-                                            <i class="fas fa-chevron-right"></i>
-                                        </span>
-        
-                                        faq
-                                    </a>
-                                </li>
-                                <li>
-                                    <a class="navbar-mobile-item__submenu" href="/help/wiki/Rules" data-toggle="collapse"
-                                        data-target=".js-navbar-mobile--menu">
-                                        <span class="navbar-mobile-item__icon">
-                                            <i class="fas fa-chevron-right"></i>
-                                        </span>
-        
-                                        rules
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-        
-                        <% if (!loggedIn) {%>
-                            <li class="navbar-mobile-item dropdown">
-                                <a data-toggle="dropdown" class="navbar-mobile-item__main dropdown-toggle" href="/">
-                                    <span
-                                        class="navbar-mobile-item__icon navbar-mobile-item__icon--main navbar-mobile-item__icon--closed">
-                                        <i class="fas fa-chevron-right"></i>
-                                    </span>
-        
-                                    <span
-                                        class="navbar-mobile-item__icon navbar-mobile-item__icon--main navbar-mobile-item__icon--opened">
-                                        <i class="fas fa-chevron-down"></i>
-                                    </span>
-        
-                                    account
-                                </a>
-        
-                                <ul class="dropdown-menu" role="menu" aria-labelledby="expand-help">
-                                    <li>
-                                        <a class="navbar-mobile-item__submenu" href="/login" data-toggle="collapse"
-                                            data-target=".js-navbar-mobile--menu">
-                                            <span class="navbar-mobile-item__icon">
-                                                <i class="fas fa-chevron-right"></i>
-                                            </span>
-        
-                                            login
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="navbar-mobile-item__submenu" href="/register" data-toggle="collapse"
-                                            data-target=".js-navbar-mobile--menu">
-                                            <span class="navbar-mobile-item__icon">
-                                                <i class="fas fa-chevron-right"></i>
-                                            </span>
-        
-                                            register
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                        <% } %>
-                    </ul>
-                </div>
-        
-                <form action="/home/search" class="navbar-mobile-search">
-                    <input class="navbar-mobile-search__input" name="query">
-                    <button class="navbar-mobile-search__icon">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </form>
+<div class="osu-layout__section osu-layout__section--full js-content rankings_performance">
+        <div class="osu-page">
+          <ul class="page-mode">
+            <li class="page-mode__item">
+              <a class="page-mode-link <% if (mode == 0) { %> page-mode-link--is-active<% } %>" href="/rankings/osu/performance">
+                osu!
+                <span class="page-mode-link__stripe"></span>
+              </a>
+            </li>
+            <li class="page-mode__item">
+              <a class="page-mode-link <% if (mode == 1) { %> page-mode-link--is-active<% } %>" href="/rankings/taiko/performance">
+                osu!taiko
+                <span class="page-mode-link__stripe"></span>
+              </a>
+            </li>
+            <li class="page-mode__item">
+              <a class="page-mode-link <% if (mode == 2) { %> page-mode-link--is-active<% } %>" href="/rankings/fruits/performance">
+                osu!catch
+                <span class="page-mode-link__stripe"></span>
+              </a>
+            </li>
+            <li class="page-mode__item">
+              <a class="page-mode-link <% if (mode == 3) %> page-mode-link--is-active<% } %>" href="/rankings/mania/performance">
+                osu!mania
+                <span class="page-mode-link__stripe"></span>
+              </a>
+            </li>
+          </ul>
+          <div class="ranking-page-header">
+            <hr class="page-mode__underline">
+    
+            <div class="ranking-page-header__title">
+              <span class="ranking-page-header__title-type">Performance</span> Leaderboard
             </div>
-        
-            <div class="nav2-header-legacy-padding"></div>
-            <div class="
-                js-pinned-header
-                hidden-xs
-                no-print
-                nav2-header
-                
-            ">
-                <div class="nav2-header__body">
-                    <div class="nav2-header__legacy-triangles"></div>
-                    <div class="nav2-header__legacy-gradient-overlay u-section--gradient-down"></div>
-        
-                    <div class="osu-page">
-                        <div class="nav2 js-nav-button">
-                            <div class="nav2__colgroup nav2__colgroup--menu js-nav-button--container">
-                                <div class="nav2__col nav2__col--logo">
-                                    <a href="/" class="nav2__logo-link">
-                                        <div class="nav2__logo nav2__logo--bg"></div>
-                                        <div class="nav2__logo"></div>
-                                    </a>
-                                </div>
-        
-                                <div class="nav2__col nav2__col--menu">
-                                    <a class="nav2__menu-link-main js-menu" href="/" data-menu-target="nav2-menu-popup-home"
-                                        data-menu-show-delay="0">
-                                        <span class="nav2__menu-link-main-text">
-                                            home
-        
-                                            <span class="nav2__menu-link-bar u-section--bg-normal"></span>
-                                        </span>
-                                    </a>
-        
-                                    <div class="nav2__menu-popup">
-                                        <div class="
-                                        simple-menu
-                                        simple-menu--nav2
-                                        simple-menu--nav2-left-aligned
-                                        
-                                        js-menu
-                                    " data-menu-id="nav2-menu-popup-home" data-visibility="hidden">
-                                            <a class="simple-menu__item u-section-home--before-bg-normal" href="/team">
-                                                team
-                                            </a>
-                                            <a class="simple-menu__item u-section-home--before-bg-normal"
-                                                href="/home/changelog">
-                                                changelog
-                                            </a>
-                                            <a class="simple-menu__item u-section-home--before-bg-normal" href="/home/download">
-                                                download
-                                            </a>
-                                            <a class="simple-menu__item u-section-home--before-bg-normal" href="/home/search">
-                                                search
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="nav2__col nav2__col--menu">
-                                    <a class="nav2__menu-link-main js-menu" href="/beatmapsets"
-                                        data-menu-target="nav2-menu-popup-beatmaps" data-menu-show-delay="0">
-                                        <span class="nav2__menu-link-main-text">
-                                            beatmaps
-        
-                                        </span>
-                                    </a>
-        
-                                    <div class="nav2__menu-popup">
-                                        <div class="
-                                        simple-menu
-                                        simple-menu--nav2
-                                        simple-menu--nav2-left-aligned
-                                        
-                                        js-menu
-                                    " data-menu-id="nav2-menu-popup-beatmaps" data-visibility="hidden">
-                                            <a class="simple-menu__item u-section-beatmaps--before-bg-normal"
-                                                href="/beatmapsets">
-                                                listing
-                                            </a>
-                                            <a class="simple-menu__item u-section-beatmaps--before-bg-normal"
-                                                href="/beatmaps/packs">
-                                                packs
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="nav2__col nav2__col--menu">
-                                    <a class="nav2__menu-link-main js-menu" href="/rankings/osu/performance"
-                                        data-menu-target="nav2-menu-popup-rankings" data-menu-show-delay="0">
-                                        <span class="nav2__menu-link-main-text">
-                                            leaderboards
-        
-                                        </span>
-                                    </a>
-        
-                                    <div class="nav2__menu-popup">
-                                        <div class="
-                                        simple-menu
-                                        simple-menu--nav2
-                                        simple-menu--nav2-left-aligned
-                                        
-                                        js-menu
-                                    " data-menu-id="nav2-menu-popup-rankings" data-visibility="hidden">
-                                            <a class="simple-menu__item u-section-rankings--before-bg-normal"
-                                                href="/rankings/osu/performance">
-                                                performance
-                                            </a>
-                                            <a class="simple-menu__item u-section-rankings--before-bg-normal"
-                                                href="/rankings/osu/score">
-                                                score
-                                            </a>
-                                            <a class="simple-menu__item u-section-rankings--before-bg-normal"
-                                                href="/rankings/osu/clans">
-                                                clans
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="nav2__col nav2__col--menu">
-                                    <a class="nav2__menu-link-main js-menu" href="/help/wiki/Welcome"
-                                        data-menu-target="nav2-menu-popup-help" data-menu-show-delay="0">
-                                        <span class="nav2__menu-link-main-text">
-                                            help
-        
-                                        </span>
-                                    </a>
-        
-                                    <div class="nav2__menu-popup">
-                                        <div class="
-                                        simple-menu
-                                        simple-menu--nav2
-                                        simple-menu--nav2-left-aligned
-                                        
-                                        js-menu
-                                    " data-menu-id="nav2-menu-popup-help" data-visibility="hidden">
-                                            <a class="simple-menu__item u-section-help--before-bg-normal"
-                                                href="/help/wiki/Welcome">
-                                                wiki
-                                            </a>
-                                            <a class="simple-menu__item u-section-help--before-bg-normal" href="/help/wiki/FAQ">
-                                                faq
-                                            </a>
-                                            <a class="simple-menu__item u-section-help--before-bg-normal"
-                                                href="/help/wiki/Rules">
-                                                rules
-                                            </a>
-                                        </div>
-                                    </div>
-                                </div>
-        
-                                <div class="nav2__col nav2__col--menu">
-                                    <a href="/search" class="
-                                nav2__menu-link-main
-                                nav2__menu-link-main--search
-                                
-                            ">
-                                        <span class="fas fa-search"></span>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="nav2__colgroup js-nav-button--container">
-                                <div class="nav2__col">
-                                    <a href="/support" class="nav2__button nav2__button--support" title="Support Awasu!">
-                                        <span class="fas fa-heart"></span>
-                                    </a>
-                                </div>
-        
-                                <% if (loggedIn) {%>
-                                    <div class="nav2__col nav2__col--avatar">
-                                        <a class="avatar avatar--nav2 js-current-user-avatar js-click-menu js-user-login--menu js-user-header"
-                                            data-click-menu-target="nav2-user-popup" href="/users/<%= userData.id %>"
-                                            style="background-image:url(https://a.awasu.xyz/<%= userData.id %>);"></a>
-        
-                                        <div class="nav2__click-popup nav2__click-popup--user js-user-header-popup">
-                                            <div class="simple-menu simple-menu--nav2 js-click-menu js-nav2--centered-popup hidden"
-                                                data-click-menu-id="nav2-user-popup" data-visibility="hidden">
-                                                <a href="/users/<%= userData.id %>"
-                                                    class="simple-menu__header simple-menu__header--link js-current-user-cover"
-                                                    style="background-image:url(https://a.awasu.xyz/<%= userData.id %>);">
-                                                    <div><%= userData.username %></div>
-                                                </a>
-        
-                                                <a class="simple-menu__item" href="/users/<%= userData.id %>">
-                                                    My profile
-                                                </a>
-        
-                                                <a class="simple-menu__item" href="/home/friends">
-                                                    Friends
-                                                </a>
-        
-                                                <a class="simple-menu__item" href="/home/account/edit">
-                                                    Settings
-                                                </a>
-        
-                                                <a class="simple-menu__item" href="/logout">
-                                                    Logout
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <% } else { %>
-        
-                                        <div class="landing-nav__section" style="padding-left: 5%;">
-                                            <a href="/login" class="landing-nav__link js-nav-toggle">
-                                                Login
-                                            </a>
-        
-                                            <a href="/register" class="landing-nav__link js-nav-toggle">
-                                                Register
-                                            </a>
-                                        </div>
-                                <% } %>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-        
-            </div>
-  <div class="osu-layout__section osu-layout__section--full js-content rankings_performance">
-    <div class="osu-page">
-      <ul class="page-mode">
-        <li class="page-mode__item">
-          <a class="page-mode-link <% if (mode == 0) { %> page-mode-link--is-active<% } %>" href="/rankings/osu/performance">
-            osu!
-            <span class="page-mode-link__stripe"></span>
-          </a>
-        </li>
-        <li class="page-mode__item">
-          <a class="page-mode-link <% if (mode == 1) { %> page-mode-link--is-active<% } %>" href="/rankings/taiko/performance">
-            osu!taiko
-            <span class="page-mode-link__stripe"></span>
-          </a>
-        </li>
-        <li class="page-mode__item">
-          <a class="page-mode-link <% if (mode == 2) { %> page-mode-link--is-active<% } %>" href="/rankings/fruits/performance">
-            osu!catch
-            <span class="page-mode-link__stripe"></span>
-          </a>
-        </li>
-        <li class="page-mode__item">
-          <a class="page-mode-link <% if (mode == 3) %> page-mode-link--is-active<% } %>" href="/rankings/mania/performance">
-            osu!mania
-            <span class="page-mode-link__stripe"></span>
-          </a>
-        </li>
-      </ul>
-      <div class="ranking-page-header">
-        <hr class="page-mode__underline">
-
-        <div class="ranking-page-header__title">
-          <span class="ranking-page-header__title-type">Performance</span> Leaderboard
-        </div>
-      </div>
-    </div>
-    <div class="osu-page osu-page--small osu-page--rankings">
-      <div class="ranking-page">
-        <div class="ranking-page__jump-target" id="scores"></div>
-        <table class="ranking-page-table">
-          <thead>
-            <tr>
-              <th class="ranking-page-table__heading"></th>
-              <th class="ranking-page-table__heading ranking-page-table__heading--main"></th>
-              <th class="ranking-page-table__heading">
-                Acc
-              </th>
-              <th class="ranking-page-table__heading">
-                Playcount
-              </th>
-              <th class="ranking-page-table__heading ranking-page-table__heading--focused">
-                PP
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <% userLeaderboard.forEach(user => { %>
-                <tr class="ranking-page-table__row" style="color:white;">
-                  <td class="ranking-page-table__column ranking-page-table__column--rank">
-                    <%= user.chosen_mode.global_leaderboard_rank %>                 
-                 </td>
-                  <td class="ranking-page-table__column">
-                    <div class="ranking-page-table__user-link">
-                        <span class="flag-country"
-                          style="background-image: url('/static/img/flags/<%= user.country %> .png');"
-                          data-hasqtip="4" data-vivaldi-spatnav-clickable="1"></span>
-                      <a href="/users/<%= user.id %>">
-                        <span class="ranking-page-table__user-link-text">
-                                <%= user.username %> 
-                        </span>
-                      </a>
-                    </div>
-                  </td>
-                  <td class="ranking-page-table__column ranking-page-table__column--dimmed">
-                    <%= Math.round(user.chosen_mode.accuracy) %> 
-                  </td>
-                  <td class="ranking-page-table__column ranking-page-table__column--dimmed">
-                        <%= user.chosen_mode.playcount %> 
-                  </td>
-                  <td class="ranking-page-table__column ranking-page-table__column--focused">
-                        <%= user.chosen_mode.pp %> 
-                  </td>
-                </tr>
-
-            <% }) %>
-          </tbody>
-        </table>
-      </div>
-        <div class="login-box__row login-box__row--actions">
-          <div class="login-box__action">
-            <button class="<#if size != 50>user-action-button user-action-button--profile-page<#else>btn-osu-big disabled btn-osu-big--nav-popup</#if>">
-              <div class="btn-osu-big__content">
-                <span class="btn-osu-big__left">
-                  You are at the end :(
-                </span>
-              </div>
-            </button>
           </div>
         </div>
-    </div>
-  </div>
-  <br>
-  <style>
-      #footer {
-          padding-top: 10px;
-          padding-bottom: 0px;
-          position:fixed;
-          bottom:0;
-          width:100%;
-      }
-      </style>
-      <div class="ui footer basic segment" id="footer">
-          <center class="ui container center" cfapps-selector="body > .footer > .ui.container.center">
-              Awasu, Ripple  <br><a href="/team">Team <i class="fas fa-users"></i></a>
-               </a>
-      </div>
+        <div class="osu-page osu-page--small osu-page--rankings">
+          <div class="ranking-page">
+            <div class="ranking-page__jump-target" id="scores"></div>
+            <table class="ranking-page-table">
+              <thead>
+                <tr>
+                  <th class="ranking-page-table__heading"></th>
+                  <th class="ranking-page-table__heading ranking-page-table__heading--main"></th>
+                  <th class="ranking-page-table__heading">
+                    Acc
+                  </th>
+                  <th class="ranking-page-table__heading">
+                    Playcount
+                  </th>
+                  <th class="ranking-page-table__heading ranking-page-table__heading--focused">
+                    PP
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <% userLeaderboard.forEach(user => { %>
+                    <tr class="ranking-page-table__row" style="color:white;">
+                      <td class="ranking-page-table__column ranking-page-table__column--rank">
+                        <%= user.chosen_mode.global_leaderboard_rank %>                 
+                     </td>
+                      <td class="ranking-page-table__column">
+                        <div class="ranking-page-table__user-link">
+                            <span class="flag-country"
+                              style="background-image: url('/static/img/flags/<%= user.country %> .png');"
+                              data-hasqtip="4" data-vivaldi-spatnav-clickable="1"></span>
+                          <a href="/users/<%= user.id %>">
+                            <span class="ranking-page-table__user-link-text">
+                                    <%= user.username %> 
+                            </span>
+                          </a>
+                        </div>
+                      </td>
+                      <td class="ranking-page-table__column ranking-page-table__column--dimmed">
+                        <%= Math.round(user.chosen_mode.accuracy) %> 
+                      </td>
+                      <td class="ranking-page-table__column ranking-page-table__column--dimmed">
+                            <%= user.chosen_mode.playcount %> 
+                      </td>
+                      <td class="ranking-page-table__column ranking-page-table__column--focused">
+                            <%= user.chosen_mode.pp %> 
+                      </td>
+                    </tr>
     
-</body>
-
-</html>
+                <% }) %>
+              </tbody>
+            </table>
+          </div>
+            <div class="login-box__row login-box__row--actions">
+              <div class="login-box__action">
+                <button class="<#if size != 50>user-action-button user-action-button--profile-page<#else>btn-osu-big disabled btn-osu-big--nav-popup</#if>">
+                  <div class="btn-osu-big__content">
+                    <span class="btn-osu-big__left">
+                      You are at the end :(
+                    </span>
+                  </div>
+                </button>
+              </div>
+            </div>
+        </div>
+      </div>

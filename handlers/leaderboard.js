@@ -4,6 +4,12 @@ const passport = require("passport");
 const requestHelper = require("../utils/requestHelper");
 
 async function handle(req, res) {
+    let registeredUsers = await query("SELECT count(id) as userCount FROM users");
+    registeredUsers = registeredUsers[0].userCount;
+    let submittedScores = await query("SELECT count(id) as scoreCount FROM scores");
+    submittedScores = submittedScores[0].scoreCount;
+    let mapCount = await query("SELECT count(id) as mapCount FROM beatmaps");
+    mapCount = mapCount[0].mapCount;
     let mode; 
     switch (req.query.m) {
     	case 0:
@@ -32,13 +38,16 @@ async function handle(req, res) {
     if (leaderboardData.users == null) {
         leaderboardData.users = []
     }
-    res.render("pages/leaderboard", {
+    res.render("base", {
         page: "Leaderboard",
         loggedIn: req.isAuthenticated(),
         userid: userId,
         userData: currentUser,
         userLeaderboard: leaderboardData.users,
-        mode: mode
+        mode: mode,
+        userCount: registeredUsers,
+        scoreCount: submittedScores,
+        mapCount: mapCount
     });
 }
 
