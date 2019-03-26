@@ -33,7 +33,7 @@ async function handle(req, res) {
         leaderboardData.users = []
     }
     res.render("base", {
-        page: "Leaderboard",
+        page: "Scoreboard",
         loggedIn: req.isAuthenticated(),
         userid: userId,
         userData: currentUser,
