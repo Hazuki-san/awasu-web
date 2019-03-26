@@ -34,7 +34,15 @@ async function handle(req, res) {
     	default:
     		mode = 0;
     }
-	let usersData = await playerHelper.getPlayerInfoFromID(req.params.id, mode)
+    let usersData = await playerHelper.getPlayerInfoFromID(req.params.id, mode)
+    if (!usersData) {
+        res.render("base", {
+            page: "404",
+            loggedIn: req.isAuthenticated(),
+            userid: userId,
+            userData: currentUser
+        });
+    }
 	let friend = await query("SELECT * FROM users_relationships WHERE user1 = ? AND user2 = ?", req.params.id, userId);
 	let isFriend = false;
 	if (friend.length > 0) {

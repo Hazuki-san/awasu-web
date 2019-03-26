@@ -615,6 +615,12 @@
      <% if (page === "Download") { %> 
         <% include pages/download.ejs %>
     <% } %>
+    <% if (page === "404") { %> 
+        <% include pages/404.ejs %>
+    <% } %>
+    <% if (page === "Verify") { %> 
+        <% include pages/verify.ejs %>
+    <% } %>
     <br>
     <style>
         #footer {

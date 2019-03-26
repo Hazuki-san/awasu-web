@@ -21,7 +21,9 @@ app.post("/login", async (req, res) => {
     let username = req.body.username;
     let password = md5(req.body.password);
     let q = await query("SELECT * FROM users WHERE username = ?", username);
-
+    if (q.length < 1) {
+        res.redirect("/login");
+    }
     let passwordCheck = passwordHelper.checkPassword(password, q[0].password_md5);
     if (!passwordCheck) {
         res.redirect("/login");
