@@ -170,7 +170,7 @@
                         </div>
                       </div>
                       <div class="profile-detail-bar__entry profile-detail-bar__entry--level">
-                        <div class="profile-detail-bar__level" title="Level <%= Math.round(profileData.stats.level) %>%"><%= Math.round(profileData.stats.level) %></div>
+                        <div class="profile-detail-bar__level" title="Level <%= Math.round(profileData.stats.level) %>"><%= Math.round(profileData.stats.level) %></div>
                       </div>
                     </div>
                   </div>
@@ -248,7 +248,7 @@
                   <div class="profile-links__item ">Last seen <span class=" profile-links__value"><time class="timeago"
                         datetime="<%= new Date(profileData.stats.lastActivity) %>" title="<%= new Date(profileData.stats.lastActivity) %>"><%= new Date(profileData.stats.lastActivity) %></time></span></div>
                 </div>
-                
+              </div>
                   <div class="profile-links__row profile-links__row--1">
                     <% if (profileData.location != "") { %>
                       <div class="profile-links__item"><span class="profile-links__icon" title="Position"><span
@@ -261,12 +261,13 @@
                           class="profile-links__value"><%= profileData.interests %></span></div>
                     <% } %>
                     <% if (profileData.occupation != "") { %>
-                      <div class="profile-links__item"><span class="profile-links__icon" title="Work as"><span
+                      <div class="profile-links__item"><span class="profile-links__icon" title="Works as"><span
                             class="fa-fw fas fa-suitcase"></span></span><span
                           class="profile-links__value"><%= profileData.occupation %></span>
                     <% } %>
                   </div>
-              </div>
+                </div>
+                <div class="profile-links__row profile-links__row--2">
               <% if (profileData.twitter != "") { %>
                 <div class="profile-links__item"><span class="profile-links__icon" title="Twitter"><span
                       class="fa-fw fab fa-twitter"></span></span><a href="https://twitter.com/<%= profileData.twitter %>"
@@ -288,6 +289,7 @@
                       class="fa-fw fas fa-link"></span></span><a href="<%= profileData.site %>"
                     class="profile-links__value profile-links__value--link"><%= profileData.site %></a></div>
               <% } %>
+              </div>
             </div>
           </div>
         </div>
