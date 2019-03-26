@@ -84,8 +84,8 @@ async function handle(req, res) {
         profileData: usersData,
         playMode: mode,
         added: isFriend,
-        topScores: topScores,
-        recentScores: recentScores
+        topScores: topScores.scores,
+        recentScores: recentScores.scores
     });
 }
 
