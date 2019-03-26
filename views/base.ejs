@@ -578,6 +578,9 @@
     <% if (page === "Home") { %> 
         <% include pages/home.ejs %>
     <% } %>
+    <% if (page == "Leaderboard") { %> 
+        <% include pages/leaderboard.ejs %>
+    <% } %>
     <% if (page === "Login") { %> 
         <% include pages/login.ejs %>
     <% } %>
@@ -602,9 +605,7 @@
     <% if (page === "Verify") { %> 
         <% include pages/verify.ejs %>
     <% } %>
-    <% if (page === "Leaderboard") { %> 
-        <% include pages/leaderboard.ejs %>
-    <% } %>
+    
     
     <br>
     <style>
