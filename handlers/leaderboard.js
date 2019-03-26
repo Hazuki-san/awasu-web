@@ -32,8 +32,8 @@ async function handle(req, res) {
     if (leaderboardData.users == null) {
         leaderboardData.users = []
     }
-    res.render("base", {
-        page: "Scoreboard",
+    res.render("pages/leaderboard", {
+        page: "Leaderboard",
         loggedIn: req.isAuthenticated(),
         userid: userId,
         userData: currentUser,
