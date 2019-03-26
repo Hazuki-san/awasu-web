@@ -16,8 +16,18 @@ async function handle(req, res) {
         currentUser = await playerHelper.getPlayerInfoFromID(userId)
     }
     let id;
+    console.log(typeof req.params.id);
     if (typeof req.params.id == "string") {
         let idQuery = await query("SELECT * FROM users WHERE username = ?", req.params.id);
+        if (idQuery.length < 1) {
+            res.render("base", {
+                page: "404",
+                loggedIn: req.isAuthenticated(),
+                userid: userId,
+                userData: currentUser
+            });
+            return
+        }
         id = idQuery[0].id
     } else {
         id = req.params.id
