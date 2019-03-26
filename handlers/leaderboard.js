@@ -21,6 +21,12 @@ async function handle(req, res) {
     	default:
     		mode = 0;
     }
+    let currentUser = {};
+    let userId = 0;
+    if (req.user) {
+        userId = req.user;
+        currentUser = await playerHelper.getPlayerInfoFromID(userId)
+    }
     let request = await requestHelper.request_get("http://awasu.xyz/api/v1/leaderboard?mode="+mode);
     let leaderboardData = JSON.parse(request.body);
     if (leaderboardData.users == null) {
