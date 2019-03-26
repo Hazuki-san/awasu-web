@@ -15,7 +15,13 @@ async function handle(req, res) {
         userId = req.user;
         currentUser = await playerHelper.getPlayerInfoFromID(userId)
     }
-    
+    let id;
+    if (typeof req.params.id == "string") {
+        let idQuery = await query("SELECT * FROM users WHERE username = ?", req.params.id);
+        id = idQuery[0].id
+    } else {
+        id = req.params.id
+    }
 
     let mode;
     switch (req.query.m) {
@@ -34,7 +40,7 @@ async function handle(req, res) {
     	default:
     		mode = 0;
     }
-    let usersData = await playerHelper.getPlayerInfoFromID(req.params.id, mode)
+    let usersData = await playerHelper.getPlayerInfoFromID(id, mode)
     if (!usersData) {
         res.render("base", {
             page: "404",
@@ -43,10 +49,10 @@ async function handle(req, res) {
             userData: currentUser
         });
     }
-	let friend = await query("SELECT * FROM users_relationships WHERE user1 = ? AND user2 = ?", req.params.id, userId);
+	let friend = await query("SELECT * FROM users_relationships WHERE user1 = ? AND user2 = ?", id, userId);
 	let isFriend = false;
 	if (friend.length > 0) {
-		let userfriend = await query("SELECT * FROM users_relationships WHERE user1 = ? AND user2 = ?", userId, req.params.id);
+		let userfriend = await query("SELECT * FROM users_relationships WHERE user1 = ? AND user2 = ?", userId, id);
 		if (userfriend.length > 0) {
 			isFriend = true;
 		}

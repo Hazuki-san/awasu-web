@@ -24,6 +24,9 @@ app.post("/login", async (req, res) => {
     if (q.length < 1) {
         res.redirect("/login");
     }
+    if (q[0].privileges == 1048576) {
+        res.redirect("/verification")
+    }
     let passwordCheck = passwordHelper.checkPassword(password, q[0].password_md5);
     if (!passwordCheck) {
         res.redirect("/login");

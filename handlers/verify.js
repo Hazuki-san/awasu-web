@@ -5,7 +5,7 @@ const md5 = require("md5")
 const { query } = require("../db")
 const passport = require("passport")
 
-app.get("/verify", async (req, res) => {
+app.get("/verification", async (req, res) => {
     let currentUser = {};
     let userId = 0;
     if (req.user) {
